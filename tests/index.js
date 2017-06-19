@@ -1,6 +1,6 @@
 const HJDict = require('../dist/hjdict')
 
-let queries = ['傘']
+let queries = ['傘', '私']
 
 for (let query of queries) {
   console.log('Start querying ' + query)

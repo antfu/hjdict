@@ -15,6 +15,7 @@ export default (url, callback) => {
         .replace(/\\"/g, '"') // Remove redundant slash
       callback(text)
     }).catch(e => {
+      console.error(e)
       callback(null, e)
     })
 }

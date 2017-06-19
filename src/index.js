@@ -29,10 +29,17 @@ export default {
     }
 
     var html = request(url, (data, e) => {
-      (option.callback || VOID_CALLBACK)({
-        query: option.query,
-        result: option.parser(data)
-      })
+      let returns = {
+        query: option.query
+      }
+
+      if (e) {
+        returns.error = e.message
+      } else {
+        returns.candidates = option.parser(data)
+      }
+
+      (option.callback || VOID_CALLBACK)(returns)
     })
   }
 }
