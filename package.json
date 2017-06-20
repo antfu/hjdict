@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=debug rollup -c",
     "watch": "cross-env NODE_ENV=debug rollup -c -w",
     "build-demo": "gulp --gulpfile demo/gulpfile.js",
-    "test": "node tests/index.js"
+    "test": "mocha tests/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,9 +27,11 @@
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-rollup": "^3.0.0",
+    "chai": "^4.0.2",
     "gulp": "^3.9.1",
     "gulp-less": "^3.3.2",
     "gulp-pug": "^3.3.0",
+    "mocha": "^3.4.2",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-uglify": "^2.0.1",
