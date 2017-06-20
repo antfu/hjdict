@@ -8,41 +8,16 @@ html
     script(src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js')
     script(src='../dist/hjdict.js')
   body
+    script#template-hjdict-query(type='text/x-template')
+      include hjdict.vue.query.pug
+
     #app
       .searchbar
-        input.search(type='text', v-model='query', @keypress.enter='doquery')
+        input.search(type='text', v-model='query_input', @keypress.enter='doquery')
         .button(@click='doquery') Search
 
-      .dict-result(:class='{mini:floated, floated:floated}')
-        template(v-if='!failed && querying')
-          .loader
-            .loader-inner
-          .loader-text Querying...
+      hjdict-query(:query='query')
 
-        template(v-if='failed')
-          .brief Failed to query. Please try again.
-
-        template(v-if='!failed && !querying && !found')
-          .brief No matches for "{{query}}".
-
-        template(v-if='!failed && !querying && found')
-          .langs(v-text='from + " > " + to')
-          .block(v-for='exp in explains', :class='get_lang_class(from, to)')
-            .sound(v-if='exp.mp3', @click='play(exp.mp3)')
-              img(src='./volume-high.svg')
-            .primary(v-text='exp.primary')
-            .secondary(v-text='exp.secondary')
-            .tertiary(v-text='exp.tertiary')
-            .brief(v-text='exp.brief')
-            .details(v-if='exp.details')
-              .part(v-for='part in exp.details')
-                .part_of_speech(v-text='part.part_of_speech')
-                .item(v-for='item in part.items')
-                  .list_item(v-if='item.type==="list"')
-                    .dot
-                    .part-a(v-text='item.jp')
-                    .part-b(v-text='item.cn')
-                  span(v-else, v-text='item.text')
       .powered
         span Powered by
         a(href='https://github.com/antfu/hjdict') 📚 HJDict

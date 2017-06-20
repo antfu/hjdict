@@ -1,20 +1,37 @@
 HJDict.set_cors_proxy('https://crossorigin.me/')
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    failed: false,
-    query: "傘",
-    explains: [],
-    error: null,
-    from: 'jp',
-    to: 'cn',
-    floated: false,
-    found: false,
-    querying: false
+Vue.component('hjdict-query', {
+  props: {
+    query: {
+      type: String,
+      default: ''
+    },
+    floated: {
+      default: false
+    }
+  },
+  template: '#template-hjdict-query',
+  data() {
+    return {
+      empty: true,
+      failed: false,
+      result: {
+        explains: [],
+        error: null,
+        from: 'jp',
+        to: 'cn',
+        found: false,
+        querying: false,
+        query: ''
+      }
+    }
+  },
+  watch: {
+    query() {
+      this.doquery()
+    }
   },
   created() {
-    this.query = "傘"
     this.doquery()
   },
   methods: {
@@ -25,25 +42,39 @@ var app = new Vue({
     },
     doquery() {
       this.failed = false
-      this.explains = []
-      this.querying = true
-      this.found = false
-      HJDict.jp2cn(this.query, data => {
-        if (!data.error) {
-          this.explains = data.explains
-          this.from = data.from
-          this.to = data.to
-          this.found = data.found
-        } else
-          this.failed = true
-        this.querying = false
-      })
-    },
-    get_lang_class(from, to) {
-      if (from === 'cn' && to === 'jp')
-        return 'lang-cn-jp'
-      else if (from === 'jp' && to === 'cn')
-        return 'lang-jp-cn'
+      this.result.explains = []
+      this.result.error = null
+      this.result.querying = true
+      this.result.found = false
+      if (this.query.trim()) {
+        this.empty = false
+        HJDict.jp2cn(this.query, data => {
+          if (!data.error) {
+            this.result = Object.assign({}, this.result, data)
+          } else
+            this.failed = true
+          this.result.querying = false
+        })
+      } else {
+        this.empty = true
+      }
+    }
+  }
+})
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    query_input: "傘",
+    query: "",
+  },
+  created() {
+    this.query_input = "傘"
+    this.doquery()
+  },
+  methods: {
+    doquery() {
+      this.query = this.query_input.trim()
     }
   }
 })

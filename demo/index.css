@@ -8,7 +8,7 @@
   max-width: 735px;
   margin: 1.2em auto;
 }
-.dict-result {
+.dict-query {
   font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
   border: 1px solid #eee;
   border-radius: 5px;
@@ -18,7 +18,7 @@
   margin: 0 auto 1.2em;
   position: relative;
 }
-.dict-result .langs {
+.dict-query .langs {
   display: inline;
   border-radius: 5px;
   background: #4eb1d6;
@@ -33,40 +33,40 @@
   text-transform: uppercase;
   cursor: default;
 }
-.dict-result .block:not(:last-child) {
+.dict-query .block:not(:last-child) {
   margin-bottom: .7em;
   padding-bottom: 1em;
   border-bottom: 0.5px solid #dff1f8;
 }
-.dict-result .block .primary {
+.dict-query .block .primary {
   color: #4eb1d6;
   font-size: 1.6em;
   margin-left: 3px;
 }
-.dict-result .block .secondary {
+.dict-query .block .secondary {
   margin-top: -5px;
   margin-left: 3px;
 }
-.dict-result .block .tertiary {
+.dict-query .block .tertiary {
   color: #999;
   margin-top: -5px;
   font-family: monospace;
   margin-left: 3px;
 }
-.dict-result .block .sound {
+.dict-query .block .sound {
   float: right;
   opacity: .3;
   cursor: pointer;
   padding: .5em;
 }
-.dict-result .block .sound:hover {
+.dict-query .block .sound:hover {
   opacity: .5;
 }
-.dict-result .block .details {
+.dict-query .block .details {
   font-size: .9em;
   line-height: 2em;
 }
-.dict-result .block .details .part_of_speech {
+.dict-query .block .details .part_of_speech {
   margin-top: 10px;
   background: #f4f4f4;
   padding: 0 1em;
@@ -77,10 +77,10 @@
   display: inline-block;
   font-weight: bold;
 }
-.dict-result .block .details .item {
+.dict-query .block .details .item {
   margin-left: .4em;
 }
-.dict-result .block .details .item .dot {
+.dict-query .block .details .item .dot {
   display: inline-block;
   width: 2px;
   height: 2px;
@@ -90,59 +90,59 @@
   border-radius: 10px;
   border: 1px solid #77c3e0;
 }
-.dict-result .block .details .item .part-a {
+.dict-query .block .details .item .part-a {
   display: inline-block;
   vertical-align: middle;
 }
-.dict-result .block .details .item .part-b {
+.dict-query .block .details .item .part-b {
   display: inline-block;
   opacity: .8;
   vertical-align: middle;
 }
-.dict-result .block .details .item .part-b::before {
+.dict-query .block .details .item .part-b::before {
   content: "/";
   margin: 0 4px;
 }
-.dict-result .lang-jp-cn {
+.dict-query .lang-jp-cn {
   font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
 }
-.dict-result .lang-jp-cn .primary {
+.dict-query .lang-jp-cn .primary {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.dict-result .lang-jp-cn .secondary {
+.dict-query .lang-jp-cn .secondary {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.dict-result .lang-jp-cn .tertiary {
+.dict-query .lang-jp-cn .tertiary {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.dict-result .lang-jp-cn .details .part-a {
+.dict-query .lang-jp-cn .details .part-a {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.dict-result .lang-cn-jp {
+.dict-query .lang-cn-jp {
   font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
 }
-.dict-result .lang-cn-jp .primary {
+.dict-query .lang-cn-jp .primary {
   font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
 }
-.dict-result .lang-cn-jp .secondary {
+.dict-query .lang-cn-jp .secondary {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.dict-result .lang-cn-jp .tertiary {
+.dict-query .lang-cn-jp .tertiary {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.dict-result .lang-cn-jp .details .part-a {
+.dict-query .lang-cn-jp .details .part-a {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.dict-result.mini {
+.dict-query.mini {
   font-size: .9em;
   max-width: 400px;
   max-height: 700px;
   overflow: scroll;
 }
-.dict-result.mini .langs {
+.dict-query.mini .langs {
   display: none;
 }
-.dict-result.floated {
+.dict-query.floated {
   box-shadow: 2px 2px 10px 0 rgba(50, 50, 50, 0.2);
   margin: unset;
   position: absolute;

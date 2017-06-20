@@ -1,0 +1,30 @@
+.dict-query(:class='{mini:floated, floated:floated}', v-show='!empty')
+  template(v-if='!failed && result.querying')
+    .loader
+      .loader-inner
+    .loader-text Querying...
+
+  template(v-if='failed')
+    .brief Failed to query. Please try again.
+
+  template(v-if='!failed && !result.querying && !result.found')
+    .brief No matches for "{{result.query}}".
+
+  template(v-if='!failed && !result.querying && result.found')
+    .langs(v-text='result.from + " > " + result.to')
+    .block(v-for='exp in result.explains', :class='"lang-" + result.from + "-" + result.to')
+      .sound(v-if='exp.mp3', @click='play(exp.mp3)')
+        img(src='./volume-high.svg')
+      .primary(v-text='exp.primary')
+      .secondary(v-text='exp.secondary')
+      .tertiary(v-text='exp.tertiary')
+      .brief(v-text='exp.brief')
+      .details(v-if='exp.details')
+        .part(v-for='part in exp.details')
+          .part_of_speech(v-text='part.part_of_speech')
+          .item(v-for='item in part.items')
+            .list_item(v-if='item.type==="list"')
+              .dot
+              .part-a(v-text='item.jp')
+              .part-b(v-text='item.cn')
+            span(v-else, v-text='item.text')
