@@ -1,4 +1,6 @@
 # HJDict
+[![npm](https://img.shields.io/npm/v/hjdict.svg?style=flat-square)](https://www.npmjs.com/package/hjdict)
+
 An unofficial [HJDict](http://dict.hjenglish.com/) API in Javascript. 沪江小D非官方API
 
 [(简体中文文档)](./README.zh-cn.md)
@@ -16,10 +18,10 @@ HJDict.jp2cn('傘', data => {
 ```JSON
 {
   "query": "傘",
-  "candidates": [{
-    "kanji": "傘",
-    "kana": "かさ",
-    "roman": "kasa",
+  "explains": [{
+    "primary": "傘",
+    "secondary": "かさ",
+    "tertiary": "kasa",
     "mp3": "http://d1.g.hjfile.cn/voice/jpsound/J12852.mp3",
     "details": [{
       "part_of_speech": "名词",
@@ -33,9 +35,9 @@ HJDict.jp2cn('傘', data => {
       }]
     }]
   }, {
-    "kanji": "傘",
-    "kana": "からかさ",
-    "roman": "karakasa",
+    "primary": "傘",
+    "secondary": "からかさ",
+    "tertiary": "karakasa",
     "mp3": "http://d1.g.hjfile.cn/voice/jpsound/J14795.mp3",
     "details": [{
       "part_of_speech": "名词",
@@ -47,6 +49,7 @@ HJDict.jp2cn('傘', data => {
   }]
 }
 ```
+For more data format, please check the [API document](./docs/API.md).
 
 ## Install
 ### Browser

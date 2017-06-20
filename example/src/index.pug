@@ -12,23 +12,35 @@ html
         input.search(type='text', v-model='query', @keypress.enter='doquery')
         .button(@click='doquery') Search
 
-      .dict(v-show='!failed && candidates.length')
-        .block(v-for='word in candidates')
-          .sound(v-if='word.mp3', @click='play(word.mp3)')
-            img(src='./volume-high.svg')
-          .kanji(v-text='word.kanji || word.hanzi')
-          .kana(v-text='word.kana')
-          .roman(v-text='word.roman')
-          .details(v-if='word.details')
-            .part(v-for='part in word.details')
-              .part_of_speech(v-text='part.part_of_speech')
-              .item(v-for='item in part.items')
-                .list_item(v-if='item.type==="list"')
-                  .dot
-                  .list_jp(v-text='item.jp')
-                  .list_cn(v-text='item.cn')
-                span(v-else, v-text='item.text')
-      .loader(v-show='!failed && !candidates.length')
-        .loader-inner
-      .dict(v-show='failed') Failed to load data
+      .dict-result(:class='{mini:floated, floated:floated}')
+        template(v-if='!failed && !explains.length')
+          .loader
+            .loader-inner
+          .loader-text Querying...
+
+        template(v-if='failed')
+          .brief Failed to load data
+
+        template(v-if='!failed && explains.length')
+          .langs(v-text='from + " > " + to')
+          .block(v-for='exp in explains', :class='get_lang_class(from, to)')
+            .sound(v-if='exp.mp3', @click='play(exp.mp3)')
+              img(src='./volume-high.svg')
+            .primary(v-text='exp.primary')
+            .secondary(v-text='exp.secondary')
+            .tertiary(v-text='exp.tertiary')
+            .brief(v-text='exp.brief')
+            .details(v-if='exp.details')
+              .part(v-for='part in exp.details')
+                .part_of_speech(v-text='part.part_of_speech')
+                .item(v-for='item in part.items')
+                  .list_item(v-if='item.type==="list"')
+                    .dot
+                    .part-a(v-text='item.jp')
+                    .part-b(v-text='item.cn')
+                  span(v-else, v-text='item.text')
+      .powered
+        span Powered by
+        a(href='https://github.com/antfu/hjdict') 📚 HJDict
+
     script(src='./index.js')

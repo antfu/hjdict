@@ -3,6 +3,8 @@
 
 **[在线Demo](https://antfu.github.io/hjdict/example/)**
 
+[Back](/)
+
 ## 语言支持
 **已实现/计划中:**
 - [x] 日中

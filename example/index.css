@@ -1,15 +1,14 @@
-.jp {
+.font-jp {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
-.cn {
+.font-cn {
   font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
 }
 .searchbar {
-  max-width: 740px;
-  text-align: right;
+  max-width: 735px;
   margin: 1.2em auto;
 }
-.dict {
+.dict-result {
   font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
   border: 1px solid #eee;
   border-radius: 5px;
@@ -17,83 +16,136 @@
   text-align: left;
   padding: 1em;
   margin: 0 auto 1.2em;
+  position: relative;
 }
-.dict .block:not(:last-child) {
+.dict-result .langs {
+  display: inline;
+  border-radius: 5px;
+  background: #4eb1d6;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 12px;
+  position: absolute;
+  top: -12px;
+  height: 12px;
+  right: 10px;
+  text-transform: uppercase;
+  cursor: default;
+}
+.dict-result .block:not(:last-child) {
   margin-bottom: .7em;
   padding-bottom: 1em;
-  border-bottom: 0.5px solid #f4fafc;
+  border-bottom: 0.5px solid #dff1f8;
 }
-.dict .kanji {
-  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+.dict-result .block .primary {
   color: #4eb1d6;
-  font-size: 1.8em;
+  font-size: 1.6em;
   margin-left: 3px;
 }
-.dict .kana {
-  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
-  font-size: 1.2em;
+.dict-result .block .secondary {
   margin-top: -5px;
   margin-left: 3px;
 }
-.dict .roman {
+.dict-result .block .tertiary {
   color: #999;
-  font-size: 1.1em;
   margin-top: -5px;
   font-family: monospace;
   margin-left: 3px;
 }
-.dict .sound {
+.dict-result .block .sound {
   float: right;
-  opacity: .6;
+  opacity: .3;
   cursor: pointer;
   padding: .5em;
 }
-.dict .sound:hover {
-  opacity: 1;
+.dict-result .block .sound:hover {
+  opacity: .5;
 }
-.dict .sound i {
-  color: #4eb1d6;
-}
-.dict .details {
+.dict-result .block .details {
   font-size: .9em;
   line-height: 2em;
 }
-.dict .part_of_speech {
+.dict-result .block .details .part_of_speech {
   margin-top: 10px;
-  background: #fafafa;
+  background: #f4f4f4;
   padding: 0 1em;
+  line-height: 1.8em;
   color: #555;
   font-size: .9em;
   border-radius: 5px;
   display: inline-block;
   font-weight: bold;
 }
-.dict .dot {
+.dict-result .block .details .item {
+  margin-left: .4em;
+}
+.dict-result .block .details .item .dot {
   display: inline-block;
   width: 2px;
   height: 2px;
   padding: 2px;
-  margin: 10px 8px;
+  margin: 0 .3em;
   vertical-align: middle;
   border-radius: 10px;
   border: 1px solid #77c3e0;
 }
-.dict .item {
-  margin-left: .4em;
-}
-.dict .list_jp {
-  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+.dict-result .block .details .item .part-a {
   display: inline-block;
+  vertical-align: middle;
 }
-.dict .list_cn {
-  font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+.dict-result .block .details .item .part-b {
   display: inline-block;
   opacity: .8;
+  vertical-align: middle;
 }
-.dict .list_cn::before {
-  font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+.dict-result .block .details .item .part-b::before {
   content: "/";
   margin: 0 4px;
+}
+.dict-result .lang-jp-cn {
+  font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+}
+.dict-result .lang-jp-cn .primary {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+.dict-result .lang-jp-cn .secondary {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+.dict-result .lang-jp-cn .tertiary {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+.dict-result .lang-jp-cn .details .part-a {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+.dict-result .lang-cn-jp {
+  font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+}
+.dict-result .lang-cn-jp .primary {
+  font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+}
+.dict-result .lang-cn-jp .secondary {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+.dict-result .lang-cn-jp .tertiary {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+.dict-result .lang-cn-jp .details .part-a {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+.dict-result.mini {
+  font-size: .9em;
+  max-width: 400px;
+  max-height: 700px;
+  overflow: scroll;
+}
+.dict-result.mini .langs {
+  display: none;
+}
+.dict-result.floated {
+  box-shadow: 2px 2px 10px 0 rgba(50, 50, 50, 0.2);
+  margin: unset;
+  position: absolute;
 }
 input[type=text],
 select {
@@ -139,6 +191,12 @@ select {
   background-color: #77c3e0;
   animation: loader-inner 2s infinite ease-in;
 }
+.loader-text {
+  color: #4eb1d6;
+  text-align: center;
+  margin-top: -1em;
+  margin-bottom: 1em;
+}
 @keyframes loader {
   0% {
     transform: rotate(0deg);
@@ -172,4 +230,16 @@ select {
   100% {
     height: 0;
   }
+}
+.powered {
+  font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+  text-align: center;
+  padding: 2em;
+  color: #cdcdcd;
+  cursor: default;
+}
+.powered a {
+  text-decoration: none;
+  color: #aaa;
+  margin-left: .5em;
 }

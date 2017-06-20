@@ -14,18 +14,18 @@ export default {
     return 'http://dict.hjenglish.com/services/huaci/jp_web_ajax.ashx?type=' + QUERY_TYPE + '&w=' + query
   },
   parser(html) {
-    let candidates = []
+    let explains = []
     let matches = html.match(REG_CANDIDATE_BLOCK)
     if (matches)
       for (let raw_block of matches) {
         let block = {}
-        block.kanji = match_group(raw_block, REG_WORD_KANJI)
-        block.kana = match_group(raw_block, REG_WORD_KANA)
-        block.roman = match_group(raw_block, REG_WORD_ROMAN)
+        block.primary = match_group(raw_block, REG_WORD_KANJI)
+        block.secondary = match_group(raw_block, REG_WORD_KANA)
+        block.tertiary = match_group(raw_block, REG_WORD_ROMAN)
         block.mp3 = match_group(raw_block, REG_WORD_MP3)
         block.details = cnjp_parse_details(match_group(raw_block, REG_WORD_DETAILS))
-        candidates.push(block)
+        explains.push(block)
       }
-    return { src: 'jp', to: 'cn', candidates }
+    return { from: 'jp', to: 'cn', explains }
   }
 }

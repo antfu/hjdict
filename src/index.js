@@ -8,7 +8,7 @@ let OPTIONS = {
 let VOID_CALLBACK = function () {}
 
 export default {
-  version: '0.0.1',
+  version: '0.0.2',
   set(options) {
     OPTIONS = Object.assign(OPTIONS, options)
   },
@@ -49,7 +49,7 @@ export default {
       }
 
       if (e) {
-        returns.error = e.message
+        returns.error = e
       } else {
         returns = Object.assign(returns, option.parser(data))
       }

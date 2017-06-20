@@ -13,30 +13,40 @@
         <input class="search" type="text" v-model="query" @keypress.enter="doquery">
         <div class="button" @click="doquery">Search</div>
       </div>
-      <div class="dict" v-show="!failed &amp;&amp; candidates.length">
-        <div class="block" v-for="word in candidates">
-          <div class="sound" v-if="word.mp3" @click="play(word.mp3)"><img src="./volume-high.svg"></div>
-          <div class="kanji" v-text="word.kanji || word.hanzi"></div>
-          <div class="kana" v-text="word.kana"></div>
-          <div class="roman" v-text="word.roman"></div>
-          <div class="details" v-if="word.details">
-            <div class="part" v-for="part in word.details">
-              <div class="part_of_speech" v-text="part.part_of_speech"></div>
-              <div class="item" v-for="item in part.items">
-                <div class="list_item" v-if="item.type===&quot;list&quot;">
-                  <div class="dot"></div>
-                  <div class="list_jp" v-text="item.jp"></div>
-                  <div class="list_cn" v-text="item.cn"></div>
-                </div><span v-else v-text="item.text"></span>
+      <div class="dict-result" :class="{mini:floated, floated:floated}">
+        <template v-if="!failed &amp;&amp; !explains.length">
+          <div class="loader">
+            <div class="loader-inner"></div>
+          </div>
+          <div class="loader-text">Querying...</div>
+        </template>
+        <template v-if="failed">
+          <div class="brief">Failed to load data</div>
+        </template>
+        <template v-if="!failed &amp;&amp; explains.length">
+          <div class="langs" v-text="from + &quot; &gt; &quot; + to"></div>
+          <div class="block" v-for="exp in explains" :class="get_lang_class(from, to)">
+            <div class="sound" v-if="exp.mp3" @click="play(exp.mp3)"><img src="./volume-high.svg"></div>
+            <div class="primary" v-text="exp.primary"></div>
+            <div class="secondary" v-text="exp.secondary"></div>
+            <div class="tertiary" v-text="exp.tertiary"></div>
+            <div class="brief" v-text="exp.brief"></div>
+            <div class="details" v-if="exp.details">
+              <div class="part" v-for="part in exp.details">
+                <div class="part_of_speech" v-text="part.part_of_speech"></div>
+                <div class="item" v-for="item in part.items">
+                  <div class="list_item" v-if="item.type===&quot;list&quot;">
+                    <div class="dot"></div>
+                    <div class="part-a" v-text="item.jp"></div>
+                    <div class="part-b" v-text="item.cn"></div>
+                  </div><span v-else v-text="item.text"></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </template>
       </div>
-      <div class="loader" v-show="!failed &amp;&amp; !candidates.length">
-        <div class="loader-inner"></div>
-      </div>
-      <div class="dict" v-show="failed">Failed to load data</div>
+      <div class="powered"><span>Powered by</span><a href="https://github.com/antfu/hjdict">📚 HJDict</a></div>
     </div>
     <script src="./index.js"></script>
   </body>

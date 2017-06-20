@@ -13,15 +13,15 @@ export default {
   },
   parser(html) {
     console.log(html)
-    let candidates = []
+    let explains = []
     let matches = html.match(REG_CANDIDATE_BLOCK)
     if (matches)
       for (let raw_block of matches) {
         let block = {}
-        block.hanzi = match_group(raw_block, REG_WORD_HANZI)
+        block.primary = match_group(raw_block, REG_WORD_HANZI)
         block.details = cnjp_parse_details(match_group(raw_block, REG_WORD_DETAILS))
-        candidates.push(block)
+        explains.push(block)
       }
-    return { src: 'cn', to: 'jp', candidates }
+    return { from: 'cn', to: 'jp', explains }
   }
 }

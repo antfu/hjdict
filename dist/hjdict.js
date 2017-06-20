@@ -33,36 +33,66 @@ var match_group = function match_group(string, regx, index, value) {
   return matches[index] || value;
 };
 
-var REG_CANDIDATE_BLOCK = /<div style="clear:both">(.*?<div id="com_panel_.*?<\/div>)/g;
-var REG_WORD_KANJI = /<span class="hjd_Green">\[<font color=red>(.*?)<\/font>\]<\/span>/;
-var REG_WORD_KANA = /<span title="假名">\[(.*?)\]<\/span>/;
-var REG_WORD_ROMAN = /<span title="罗马音".*?\[(.*?)\]<\/font><\/span>/;
-var REG_WORD_MP3 = /class="hjd_fl">(.*?)<\/span>/;
-var REG_WORD_DETAILS = /class="hjd_jp_explain">(.*?)<\/div>/;
 var REG_WORD_DETAILS_EXAMPLE_LIST = /<img.*?>(.*?)\/(.*)/;
 var REG_WORD_DETAILS_PART_OF_SPEECH = /【(.*?)】/;
 
-var jp_cn = {
-  url: function url(query) {
-    return 'http://dict.hjenglish.com/services/huaci/jp_web_ajax.ashx?type=jc&w=' + query;
-  },
-  parser: function parser(html) {
-    var candidates = [];
+function cnjp_parse_details(raw_details) {
+  raw_details = (raw_details || '').trim();
+  var details = [];
+  var raw_parts = raw_details.split('<b>').filter(function (i) {
+    return i && i.trim();
+  }) || [];
+  if (raw_parts.length) {
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = html.match(REG_CANDIDATE_BLOCK)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var raw_block = _step.value;
+      for (var _iterator = raw_parts[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var raw_part = _step.value;
 
-        var block = {};
-        block.kanji = match_group(raw_block, REG_WORD_KANJI);
-        block.kana = match_group(raw_block, REG_WORD_KANA);
-        block.roman = match_group(raw_block, REG_WORD_ROMAN);
-        block.mp3 = match_group(raw_block, REG_WORD_MP3);
-        block.details = _parse_details(match_group(raw_block, REG_WORD_DETAILS));
-        candidates.push(block);
+        var raw_items = (raw_part.split('</b>')[1] || '').split('<br/>').filter(function (i) {
+          return i && i.trim();
+        });
+        var items = [];
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = raw_items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var i = _step2.value;
+
+            var matches = i.match(REG_WORD_DETAILS_EXAMPLE_LIST);
+            if (matches) {
+              items.push({
+                type: 'list',
+                jp: matches[1],
+                cn: matches[2]
+              });
+            } else {
+              items.push({ type: 'text', text: i.trim() });
+            }
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+
+        details.push({
+          part_of_speech: match_group(raw_part, REG_WORD_DETAILS_PART_OF_SPEECH),
+          items: items
+        });
       }
     } catch (err) {
       _didIteratorError = true;
@@ -78,84 +108,106 @@ var jp_cn = {
         }
       }
     }
+  } else if (raw_details) {
+    details.push({ items: [{ type: 'text', text: raw_details }] });
+  }
+  return details;
+}
 
-    return candidates;
+var QUERY_TYPE = 'cj';
+var REG_CANDIDATE_BLOCK = /<div style="clear:both">(.*?<div id="com_panel_.*?<\/div>)/g;
+var REG_WORD_HANZI = /<span class="hjd_Green">\[(.*?)\]<\/span>/;
+var REG_WORD_DETAILS = /class="hjd_jp_explain">(.*?)<\/div>/;
+
+var _cn2jp = {
+  url: function url(query) {
+    return 'http://dict.hjenglish.com/services/huaci/jp_web_ajax.ashx?type=' + QUERY_TYPE + '&w=' + query;
+  },
+  parser: function parser(html) {
+    console.log(html);
+    var explains = [];
+    var matches = html.match(REG_CANDIDATE_BLOCK);
+    if (matches) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = matches[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _raw_block = _step.value;
+
+          var block = {};
+          block.primary = match_group(_raw_block, REG_WORD_HANZI);
+          block.details = cnjp_parse_details(match_group(_raw_block, REG_WORD_DETAILS));
+          explains.push(block);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    }return { from: 'cn', to: 'jp', explains: explains };
   }
 };
 
-function _parse_details(raw_details) {
-  raw_details = raw_details || '';
-  var details = [];
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
+var QUERY_TYPE$1 = 'jc';
+var REG_CANDIDATE_BLOCK$1 = /<div style="clear:both">(.*?<div id="com_panel_.*?<\/div>)/g;
+var REG_WORD_KANJI = /<span class="hjd_Green">\[<font color=red>(.*?)<\/font>\]<\/span>/;
+var REG_WORD_KANA = /<span title="假名">\[(.*?)\]<\/span>/;
+var REG_WORD_ROMAN = /<span title="罗马音".*?\[(.*?)\]<\/font><\/span>/;
+var REG_WORD_MP3 = /class="hjd_fl">(.*?)<\/span>/;
+var REG_WORD_DETAILS$1 = /class="hjd_jp_explain">(.*?)<\/div>/;
 
-  try {
-    for (var _iterator2 = raw_details.split('<b>').filter(function (i) {
-      return i && i.trim();
-    })[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var raw_part = _step2.value;
-
-      var raw_items = (raw_part.split('</b>')[1] || '').split('<br/>').filter(function (i) {
-        return i && i.trim();
-      });
-      var items = [];
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
+var _jp2cn = {
+  url: function url(query) {
+    return 'http://dict.hjenglish.com/services/huaci/jp_web_ajax.ashx?type=' + QUERY_TYPE$1 + '&w=' + query;
+  },
+  parser: function parser(html) {
+    var explains = [];
+    var matches = html.match(REG_CANDIDATE_BLOCK$1);
+    if (matches) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
       try {
-        for (var _iterator3 = raw_items[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var i = _step3.value;
+        for (var _iterator = matches[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _raw_block = _step.value;
 
-          var matches = i.match(REG_WORD_DETAILS_EXAMPLE_LIST);
-          if (matches) {
-            items.push({
-              type: 'list',
-              jp: matches[1],
-              cn: matches[2]
-            });
-          } else {
-            items.push({ type: 'text', text: i.trim() });
-          }
+          var block = {};
+          block.primary = match_group(_raw_block, REG_WORD_KANJI);
+          block.secondary = match_group(_raw_block, REG_WORD_KANA);
+          block.tertiary = match_group(_raw_block, REG_WORD_ROMAN);
+          block.mp3 = match_group(_raw_block, REG_WORD_MP3);
+          block.details = cnjp_parse_details(match_group(_raw_block, REG_WORD_DETAILS$1));
+          explains.push(block);
         }
       } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
           }
         } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
+          if (_didIteratorError) {
+            throw _iteratorError;
           }
         }
       }
-
-      details.push({
-        part_of_speech: match_group(raw_part, REG_WORD_DETAILS_PART_OF_SPEECH),
-        items: items
-      });
-    }
-  } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return) {
-        _iterator2.return();
-      }
-    } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
-      }
-    }
+    }return { from: 'jp', to: 'cn', explains: explains };
   }
-
-  return details;
-}
+};
 
 var OPTIONS = {
   cors_proxy: ''
@@ -164,7 +216,7 @@ var OPTIONS = {
 var VOID_CALLBACK = function VOID_CALLBACK() {};
 
 var index = {
-  version: '0.0.1',
+  version: '0.0.2',
   set: function set(options) {
     OPTIONS = Object.assign(OPTIONS, options);
   },
@@ -173,8 +225,16 @@ var index = {
   },
   jp2cn: function jp2cn(query, callback) {
     this.query({
-      parser: jp_cn.parser,
-      url: jp_cn.url,
+      parser: _jp2cn.parser,
+      url: _jp2cn.url,
+      query: query,
+      callback: callback
+    });
+  },
+  cn2jp: function cn2jp(query, callback) {
+    this.query({
+      parser: _cn2jp.parser,
+      url: _cn2jp.url,
       query: query,
       callback: callback
     });
@@ -194,9 +254,9 @@ var index = {
       };
 
       if (e) {
-        returns.error = e.message;
+        returns.error = e;
       } else {
-        returns.candidates = option.parser(data);
+        returns = Object.assign(returns, option.parser(data));
       }
 
       (option.callback || VOID_CALLBACK)(returns);
