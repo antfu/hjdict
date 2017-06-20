@@ -8,6 +8,12 @@ let OPTIONS = {
 let VOID_CALLBACK = function () {}
 
 export default {
+  set(options) {
+    OPTIONS = Object.assign(OPTIONS, options)
+  },
+  set_cos_proxy(proxy) {
+    this.set({ cos_proxy: proxy })
+  },
   jp2cn(query, callback) {
     this.query({
       parser: jp_cn.parser,

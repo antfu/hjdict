@@ -17,7 +17,7 @@ export default {
   entry: 'src/index.js',
   plugins,
   format: 'umd',
-  moduleName: 'hjdict',
+  moduleName: 'HJDict',
   sourceMap: true,
   dest: 'dist/hjdict.js',
   external: [ 'node-fetch' ]

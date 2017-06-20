@@ -1,0 +1,34 @@
+doctype html
+html 
+  head
+    title HJDict Example
+    meta(charset='UTF-8')
+    link(rel='stylesheet', href='./index.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js')
+    script(src='../dist/hjdict.js')
+  body
+    #app
+      .searchbar
+        input.search(type='text', v-model='query', @keypress.enter='doquery')
+        .button(@click='doquery') Search
+
+      .dict(v-show='!failed && candidates.length')
+        .block(v-for='word in candidates')
+          .sound(v-if='word.mp3', @click='play(word.mp3)')
+            img(src='./volume-high.svg')
+          .kanji(v-text='word.kanji')
+          .kana(v-text='word.kana')
+          .roman(v-text='word.roman')
+          .details(v-if='word.details')
+            .part(v-for='part in word.details')
+              .part_of_speech(v-text='part.part_of_speech')
+              .item(v-for='item in part.items')
+                .list_item(v-if='item.type==="list"')
+                  .dot
+                  .list_jp(v-text='item.jp')
+                  .list_cn(v-text='item.cn')
+                span(v-else, v-text='item.text')
+      .loader(v-show='!failed && !candidates.length')
+        .loader-inner
+      .dict(v-show='failed') Failed to load data
+    script(src='./index.js')
