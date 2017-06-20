@@ -1,5 +1,5 @@
 import { request } from './utils'
-import jp_cn from './parser/jp-cn'
+import { jp2cn, cn2jp } from './parser/index'
 
 let OPTIONS = {
   cors_proxy: ''
@@ -17,8 +17,16 @@ export default {
   },
   jp2cn(query, callback) {
     this.query({
-      parser: jp_cn.parser,
-      url: jp_cn.url,
+      parser: jp2cn.parser,
+      url: jp2cn.url,
+      query,
+      callback
+    })
+  },
+  cn2jp(query, callback) {
+    this.query({
+      parser: cn2jp.parser,
+      url: cn2jp.url,
       query,
       callback
     })
@@ -43,7 +51,7 @@ export default {
       if (e) {
         returns.error = e.message
       } else {
-        returns.candidates = option.parser(data)
+        returns = Object.assign(returns, option.parser(data))
       }
 
       (option.callback || VOID_CALLBACK)(returns)

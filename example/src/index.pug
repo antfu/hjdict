@@ -16,7 +16,7 @@ html
         .block(v-for='word in candidates')
           .sound(v-if='word.mp3', @click='play(word.mp3)')
             img(src='./volume-high.svg')
-          .kanji(v-text='word.kanji')
+          .kanji(v-text='word.kanji || word.hanzi')
           .kana(v-text='word.kana')
           .roman(v-text='word.roman')
           .details(v-if='word.details')

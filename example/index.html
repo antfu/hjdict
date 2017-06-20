@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
   <head>
     <title>HJDict Example</title>
     <meta charset="UTF-8">
@@ -10,33 +10,33 @@
   <body>
     <div id="app">
       <div class="searchbar">
-        <input type="text" v-model="query" class="search" @keypress.enter="doquery">
-        <div @click="doquery" class="button">Search</div>
+        <input class="search" type="text" v-model="query" @keypress.enter="doquery">
+        <div class="button" @click="doquery">Search</div>
       </div>
-      <div v-show="!failed &amp;&amp; candidates.length" class="dict">
-        <div v-for="word in candidates" class="block">
-          <div v-if="word.mp3" @click="play(word.mp3)" class="sound"><img src="./volume-high.svg"></div>
-          <div v-text="word.kanji" class="kanji"></div>
-          <div v-text="word.kana" class="kana"></div>
-          <div v-text="word.roman" class="roman"></div>
-          <div v-if="word.details" class="details">
-            <div v-for="part in word.details" class="part">
-              <div v-text="part.part_of_speech" class="part_of_speech"></div>
-              <div v-for="item in part.items" class="item">
-                <div v-if="item.type===&quot;list&quot;" class="list_item">
+      <div class="dict" v-show="!failed &amp;&amp; candidates.length">
+        <div class="block" v-for="word in candidates">
+          <div class="sound" v-if="word.mp3" @click="play(word.mp3)"><img src="./volume-high.svg"></div>
+          <div class="kanji" v-text="word.kanji || word.hanzi"></div>
+          <div class="kana" v-text="word.kana"></div>
+          <div class="roman" v-text="word.roman"></div>
+          <div class="details" v-if="word.details">
+            <div class="part" v-for="part in word.details">
+              <div class="part_of_speech" v-text="part.part_of_speech"></div>
+              <div class="item" v-for="item in part.items">
+                <div class="list_item" v-if="item.type===&quot;list&quot;">
                   <div class="dot"></div>
-                  <div v-text="item.jp" class="list_jp"></div>
-                  <div v-text="item.cn" class="list_cn"></div>
+                  <div class="list_jp" v-text="item.jp"></div>
+                  <div class="list_cn" v-text="item.cn"></div>
                 </div><span v-else v-text="item.text"></span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div v-show="!failed &amp;&amp; !candidates.length" class="loader">
+      <div class="loader" v-show="!failed &amp;&amp; !candidates.length">
         <div class="loader-inner"></div>
       </div>
-      <div v-show="failed" class="dict">Failed to load data</div>
+      <div class="dict" v-show="failed">Failed to load data</div>
     </div>
     <script src="./index.js"></script>
   </body>
