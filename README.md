@@ -5,12 +5,13 @@ An unofficial [HJDict](http://dict.hjenglish.com/) API in Javascript. 沪江小D
 
 [(简体中文文档)](./README.zh-cn.md)
 
-**[Live demo](https://antfu.github.io/hjdict/example/)**
+**[🌐 Live demo](https://antfu.github.io/hjdict/demo/)**
 
 ## Quick Example
 Get Japanese-Chinese dict:
 ```js
 HJDict.jp2cn('傘', data => {
+  console.log(data)
   // Do what you what with the data
 })
 ```
@@ -76,7 +77,8 @@ var HJDict = require('hjdict')
 ```
 
 ## Cross Origin Request
-We recommend a free CORS proxy: http://crossorigin.me/. You can set it by using:
+We recommend a free CORS proxy: http://crossorigin.me/.
+You can set it by using the following code at the begin of your scripts:
 ```js
 HJDict.set_cors_proxy('http://crossorigin.me/')
 ```
@@ -84,13 +86,13 @@ HJDict.set_cors_proxy('http://crossorigin.me/')
 ## Language Support
 **Supported/Planed:**
 - [x] Japanese-Chinese
-- [ ] Chinese-Japanese
+- [x] Chinese-Japanese
 - [ ] English-Chinese
 - [ ] Chinese-English
 
-***Note:*** There is some other languages are supported by HJDict but not
-in this list. Since I am not a user in those languages, I may not have
-motivation to implement the APIs for them. However, any PR is welcome 🤗.
+***Note:*** There are some other languages are supported by HJDict.com but not
+in this list. Since I am not a user of those languages, I may not have
+time to implement them. However, any PR is welcome 🤗.
 
 
 ## License

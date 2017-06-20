@@ -7,7 +7,7 @@
     "build-prod": "cross-env NODE_ENV=production rollup -c",
     "build": "cross-env NODE_ENV=debug rollup -c",
     "watch": "cross-env NODE_ENV=debug rollup -c -w",
-    "build-example": "gulp --gulpfile example/gulpfile.js",
+    "build-demo": "gulp --gulpfile demo/gulpfile.js",
     "test": "node tests/index.js"
   },
   "repository": {
