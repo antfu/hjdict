@@ -62,7 +62,7 @@ Or you can just use
 
 ***Note:*** When using HJDict in browser,
 you may face [Cross Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) problem.
-You should try [the solution here](#Cross_Origin_Request).
+You should try [the solution here](#cross-origin-request).
 
 ### Node
 ```sh

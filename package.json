@@ -14,8 +14,8 @@
     "url": "git+https://github.com/antfu/hjdict.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Anthony Fu",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/antfu/hjdict/issues"
   },
