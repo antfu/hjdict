@@ -8,6 +8,7 @@ let OPTIONS = {
 let VOID_CALLBACK = function () {}
 
 export default {
+  version: '0.0.1',
   set(options) {
     OPTIONS = Object.assign(OPTIONS, options)
   },

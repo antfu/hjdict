@@ -1,13 +1,14 @@
-# HJDict
+# HJDict [WIP]
 An unofficial [HJDict](http://dict.hjenglish.com/) API in Javascript.
 
 沪江小D非官方API [(简体中文文档)](./README.zh-cn.md)
 
-*⚠WIP...*
+A Live demo here: https://antfu.github.io/hjdict/example/
 
 ## Quick Example
+Get Japanese-Chinese dict:
 ```js
-HJDict.jp2cn(query, data => {
+HJDict.jp2cn('傘', data => {
   // Do what you what with data
 })
 ```
