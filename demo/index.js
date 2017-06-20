@@ -9,7 +9,9 @@ var app = new Vue({
     error: null,
     from: 'jp',
     to: 'cn',
-    floated: false
+    floated: false,
+    found: false,
+    querying: false
   },
   created() {
     this.query = "傘"
@@ -24,11 +26,17 @@ var app = new Vue({
     doquery() {
       this.failed = false
       this.explains = []
+      this.querying = true
+      this.found = false
       HJDict.jp2cn(this.query, data => {
-        if (data.explains)
+        if (!data.error) {
           this.explains = data.explains
-        else
+          this.from = data.from
+          this.to = data.to
+          this.found = data.found
+        } else
           this.failed = true
+        this.querying = false
       })
     },
     get_lang_class(from, to) {

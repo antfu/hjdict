@@ -7,4 +7,3 @@ cache:
 install:
   - npm install -g mocha cross-env gulp-cli rollup
   - npm install
-  - npm run build

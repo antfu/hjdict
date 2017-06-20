@@ -1,5 +1,6 @@
 # HJDict
 [![npm](https://img.shields.io/npm/v/hjdict.svg?style=flat-square)](https://www.npmjs.com/package/hjdict)
+[![Travis](https://img.shields.io/travis/antfu/hjdict.svg?style=flat-square)](https://travis-ci.org/antfu/hjdict)
 
 An unofficial [HJDict](http://dict.hjenglish.com/) API in Javascript. 沪江小D非官方API
 

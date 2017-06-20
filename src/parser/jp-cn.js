@@ -15,8 +15,10 @@ export default {
   },
   parser(html) {
     let explains = []
+    let found = false
     let matches = html.match(REG_CANDIDATE_BLOCK)
-    if (matches)
+    if (matches) {
+      found = true
       for (let raw_block of matches) {
         let block = {}
         block.primary = match_group(raw_block, REG_WORD_KANJI)
@@ -26,6 +28,7 @@ export default {
         block.details = cnjp_parse_details(match_group(raw_block, REG_WORD_DETAILS))
         explains.push(block)
       }
-    return { from: 'jp', to: 'cn', explains }
+    }
+    return { from: 'jp', to: 'cn', explains, found }
   }
 }

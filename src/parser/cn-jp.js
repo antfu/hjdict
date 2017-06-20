@@ -12,16 +12,18 @@ export default {
     return 'http://dict.hjenglish.com/services/huaci/jp_web_ajax.ashx?type=' + QUERY_TYPE + '&w=' + query
   },
   parser(html) {
-    console.log(html)
     let explains = []
+    let found = false
     let matches = html.match(REG_CANDIDATE_BLOCK)
-    if (matches)
+    if (matches) {
+      found = true
       for (let raw_block of matches) {
         let block = {}
         block.primary = match_group(raw_block, REG_WORD_HANZI)
         block.details = cnjp_parse_details(match_group(raw_block, REG_WORD_DETAILS))
         explains.push(block)
       }
-    return { from: 'cn', to: 'jp', explains }
+    }
+    return { from: 'cn', to: 'jp', explains, found }
   }
 }

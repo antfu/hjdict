@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=debug rollup -c",
     "watch": "cross-env NODE_ENV=debug rollup -c -w",
     "build-demo": "gulp --gulpfile demo/gulpfile.js",
-    "test": "mocha tests/index.js"
+    "test": "npm run build && mocha test"
   },
   "repository": {
     "type": "git",

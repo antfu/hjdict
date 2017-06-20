@@ -124,21 +124,22 @@ var _cn2jp = {
     return 'http://dict.hjenglish.com/services/huaci/jp_web_ajax.ashx?type=' + QUERY_TYPE + '&w=' + query;
   },
   parser: function parser(html) {
-    console.log(html);
     var explains = [];
+    var found = false;
     var matches = html.match(REG_CANDIDATE_BLOCK);
     if (matches) {
+      found = true;
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
 
       try {
         for (var _iterator = matches[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var _raw_block = _step.value;
+          var raw_block = _step.value;
 
           var block = {};
-          block.primary = match_group(_raw_block, REG_WORD_HANZI);
-          block.details = cnjp_parse_details(match_group(_raw_block, REG_WORD_DETAILS));
+          block.primary = match_group(raw_block, REG_WORD_HANZI);
+          block.details = cnjp_parse_details(match_group(raw_block, REG_WORD_DETAILS));
           explains.push(block);
         }
       } catch (err) {
@@ -155,7 +156,8 @@ var _cn2jp = {
           }
         }
       }
-    }return { from: 'cn', to: 'jp', explains: explains };
+    }
+    return { from: 'cn', to: 'jp', explains: explains, found: found };
   }
 };
 
@@ -173,22 +175,24 @@ var _jp2cn = {
   },
   parser: function parser(html) {
     var explains = [];
+    var found = false;
     var matches = html.match(REG_CANDIDATE_BLOCK$1);
     if (matches) {
+      found = true;
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
       var _iteratorError = undefined;
 
       try {
         for (var _iterator = matches[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var _raw_block = _step.value;
+          var raw_block = _step.value;
 
           var block = {};
-          block.primary = match_group(_raw_block, REG_WORD_KANJI);
-          block.secondary = match_group(_raw_block, REG_WORD_KANA);
-          block.tertiary = match_group(_raw_block, REG_WORD_ROMAN);
-          block.mp3 = match_group(_raw_block, REG_WORD_MP3);
-          block.details = cnjp_parse_details(match_group(_raw_block, REG_WORD_DETAILS$1));
+          block.primary = match_group(raw_block, REG_WORD_KANJI);
+          block.secondary = match_group(raw_block, REG_WORD_KANA);
+          block.tertiary = match_group(raw_block, REG_WORD_ROMAN);
+          block.mp3 = match_group(raw_block, REG_WORD_MP3);
+          block.details = cnjp_parse_details(match_group(raw_block, REG_WORD_DETAILS$1));
           explains.push(block);
         }
       } catch (err) {
@@ -205,7 +209,8 @@ var _jp2cn = {
           }
         }
       }
-    }return { from: 'jp', to: 'cn', explains: explains };
+    }
+    return { from: 'jp', to: 'cn', explains: explains, found: found };
   }
 };
 

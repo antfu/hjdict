@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
   <head>
-    <title>HJDict Example</title>
+    <title>HJDict Demo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
@@ -15,16 +15,19 @@
         <div class="button" @click="doquery">Search</div>
       </div>
       <div class="dict-result" :class="{mini:floated, floated:floated}">
-        <template v-if="!failed &amp;&amp; !explains.length">
+        <template v-if="!failed &amp;&amp; querying">
           <div class="loader">
             <div class="loader-inner"></div>
           </div>
           <div class="loader-text">Querying...</div>
         </template>
         <template v-if="failed">
-          <div class="brief">Failed to load data</div>
+          <div class="brief">Failed to query. Please try again.</div>
         </template>
-        <template v-if="!failed &amp;&amp; explains.length">
+        <template v-if="!failed &amp;&amp; !querying &amp;&amp; !found">
+          <div class="brief">No matches for "{{query}}".</div>
+        </template>
+        <template v-if="!failed &amp;&amp; !querying &amp;&amp; found">
           <div class="langs" v-text="from + &quot; &gt; &quot; + to"></div>
           <div class="block" v-for="exp in explains" :class="get_lang_class(from, to)">
             <div class="sound" v-if="exp.mp3" @click="play(exp.mp3)"><img src="./volume-high.svg"></div>
