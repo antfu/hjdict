@@ -2,7 +2,7 @@ import { request } from './utils'
 import jp_cn from './parser/jp-cn'
 
 let OPTIONS = {
-  cos_proxy: ''
+  cors_proxy: ''
 }
 
 let VOID_CALLBACK = function () {}
@@ -12,8 +12,8 @@ export default {
   set(options) {
     OPTIONS = Object.assign(OPTIONS, options)
   },
-  set_cos_proxy(proxy) {
-    this.set({ cos_proxy: proxy })
+  set_cors_proxy(proxy) {
+    this.set({ cors_proxy: proxy })
   },
   jp2cn(query, callback) {
     this.query({
@@ -28,11 +28,11 @@ export default {
 
     let url = option.url(option.query)
     url = encodeURI(url)
-    if (option.cos_proxy) {
-      if (typeof option.cos_proxy === 'function')
-        url = option.cos_proxy(url)
+    if (option.cors_proxy) {
+      if (typeof option.cors_proxy === 'function')
+        url = option.cors_proxy(url)
       else
-        url = option.cos_proxy + url
+        url = option.cors_proxy + url
     }
 
     var html = request(url, (data, e) => {

@@ -1,4 +1,4 @@
-HJDict.set_cos_proxy('https://crossorigin.me/')
+HJDict.set_cors_proxy('https://crossorigin.me/')
 
 var app = new Vue({
   el: '#app',

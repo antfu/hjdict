@@ -48,6 +48,36 @@ HJDict.jp2cn('傘', data => {
 }
 ```
 
+## Install
+### Browser
+Download [hjdict.js](./dist/hjdict.js)
+and add following code in your HTML head:
+```html
+<script src="<Path To>/hjdict.js">
+```
+Or you can just use
+```html
+<script src="https://antfu.github.io/hjdict/dist/hjdict.js">
+```
+
+***Note:*** When using HJDict in browser,
+you may face [Cross Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) problem.
+You should try [the solution here](#Cross_Origin_Request).
+
+### Node
+```sh
+npm install hjdict
+```
+```js
+var HJDict = require('hjdict')
+```
+
+## Cross Origin Request
+We recommend a free CORS proxy: http://crossorigin.me/. You can set it by using:
+```js
+HJDict.set_cors_proxy('http://crossorigin.me/')
+```
+
 ## Language Support
 **Supported/Planed:**
 - [x] Japanese-Chinese

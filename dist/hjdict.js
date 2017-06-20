@@ -158,7 +158,7 @@ function _parse_details(raw_details) {
 }
 
 var OPTIONS = {
-  cos_proxy: ''
+  cors_proxy: ''
 };
 
 var VOID_CALLBACK = function VOID_CALLBACK() {};
@@ -168,8 +168,8 @@ var index = {
   set: function set(options) {
     OPTIONS = Object.assign(OPTIONS, options);
   },
-  set_cos_proxy: function set_cos_proxy(proxy) {
-    this.set({ cos_proxy: proxy });
+  set_cors_proxy: function set_cors_proxy(proxy) {
+    this.set({ cors_proxy: proxy });
   },
   jp2cn: function jp2cn(query, callback) {
     this.query({
@@ -184,8 +184,8 @@ var index = {
 
     var url = option.url(option.query);
     url = encodeURI(url);
-    if (option.cos_proxy) {
-      if (typeof option.cos_proxy === 'function') url = option.cos_proxy(url);else url = option.cos_proxy + url;
+    if (option.cors_proxy) {
+      if (typeof option.cors_proxy === 'function') url = option.cors_proxy(url);else url = option.cors_proxy + url;
     }
 
     var html = request(url, function (data, e) {
