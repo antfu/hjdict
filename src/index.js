@@ -1,4 +1,4 @@
-import request from './utils/request'
+import { request } from './utils'
 import jp_cn from './parser/jp-cn'
 
 let OPTIONS = {

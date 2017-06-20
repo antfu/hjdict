@@ -1,8 +1,8 @@
 {
   "name": "hjdict",
   "version": "1.0.0",
-  "description": "An unofficial HJDict API in Javascript. 沪江小D非官方API.",
-  "main": "index.js",
+  "description": "An unofficial HJDict API in Javascript",
+  "main": "dist/hjdict.js",
   "scripts": {
     "build-prod": "cross-env NODE_ENV=production rollup -c",
     "build": "cross-env NODE_ENV=debug rollup -c",
