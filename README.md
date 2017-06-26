@@ -1,8 +1,8 @@
-# HJDict
+# HjDict
 [![npm](https://img.shields.io/npm/v/hjdict.svg?style=flat-square)](https://www.npmjs.com/package/hjdict)
 [![Travis](https://img.shields.io/travis/antfu/hjdict.svg?style=flat-square)](https://travis-ci.org/antfu/hjdict)
 
-An unofficial [HJDict](http://dict.hjenglish.com/) API in Javascript. 沪江小D非官方API
+An unofficial [HjDict](http://dict.hjenglish.com/) API in Javascript. 沪江小D非官方API
 
 [(简体中文文档)](./README.zh-cn.md)
 
@@ -11,7 +11,7 @@ An unofficial [HJDict](http://dict.hjenglish.com/) API in Javascript. 沪江小D
 ## Quick Example
 Get Japanese-Chinese dict:
 ```js
-HJDict.jp2cn('傘', data => {
+HjDict.jp2cn('傘', data => {
   console.log(data)
   // Do what you what with the data
 })
@@ -55,7 +55,7 @@ For more data format, please check the [API document](./docs/API.md).
 
 ## Install
 ### Browser
-Download [hjdict.js](./dist/hjdict.js)
+Download [hjdict.js](https://antfu.github.io/hjdict/dist/hjdict.js)
 and add following code in your HTML head:
 ```html
 <script src="<Path To>/hjdict.js">
@@ -65,7 +65,7 @@ Or you can just use
 <script src="https://antfu.github.io/hjdict/dist/hjdict.js">
 ```
 
-***Note:*** When using HJDict in browser,
+***Note:*** When using HjDict in browser,
 you may face [Cross Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) problem.
 You should try [the solution here](#cross-origin-request).
 
@@ -74,14 +74,18 @@ You should try [the solution here](#cross-origin-request).
 npm install hjdict
 ```
 ```js
-var HJDict = require('hjdict')
+var HjDict = require('hjdict')
 ```
 
 ## Cross Origin Request
-We recommend a free CORS proxy: http://crossorigin.me/.
-You can set it by using the following code at the begin of your scripts:
+Since version `0.0.3`, the default CORS proxy is set to http://crossorigin.me/.
+You can always set/unset it by using the following code at the begin of your scripts:
 ```js
-HJDict.set_cors_proxy('http://crossorigin.me/')
+// Set the cors proxy
+HjDict.set_cors_proxy('http://crossorigin.me/')
+
+// Reset
+HjDict.set_cors_proxy('')
 ```
 
 ## Language Support
@@ -91,7 +95,7 @@ HJDict.set_cors_proxy('http://crossorigin.me/')
 - [ ] English-Chinese
 - [ ] Chinese-English
 
-***Note:*** There are some other languages are supported by HJDict.com but not
+***Note:*** There are some other languages are supported by HjDict.com but not
 in this list. Since I am not a user of those languages, I may not have
 time to implement them. However, any PR is welcome 🤗.
 

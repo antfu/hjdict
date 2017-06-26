@@ -1,7 +1,14 @@
+/**
+ * HjDict v0.0.3
+ * (C) Anthony Fu 2017
+ * Released under the MIT License.
+ * https://github.com/antfu/hjdict
+ */
+
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('node-fetch')) :
 	typeof define === 'function' && define.amd ? define(['node-fetch'], factory) :
-	(global.HJDict = factory(global.fetch));
+	(global.HjDict = factory(global.fetch));
 }(this, (function (fetch) { 'use strict';
 
 fetch = fetch && 'default' in fetch ? fetch['default'] : fetch;
@@ -16,9 +23,9 @@ var request = function request(url, callback) {
   (fetch || window.fetch)(url).then(function (r) {
     return r.text();
   }).then(function (raw) {
-    var text = to_unicode(raw).replace(/\\t/g, '' // Remove redundant slash
-    ).replace(/\\"/g, '"' // Remove redundant slash
-    );callback(text);
+    var text = to_unicode(raw).replace(/\\t/g, '') // Remove redundant slash
+    .replace(/\\"/g, '"'); // Remove redundant slash
+    callback(text);
   }).catch(function (e) {
     console.error(e);
     callback(null, e);
@@ -215,13 +222,13 @@ var _jp2cn = {
 };
 
 var OPTIONS = {
-  cors_proxy: ''
+  cors_proxy: 'http://crossorigin.me/'
 };
 
 var VOID_CALLBACK = function VOID_CALLBACK() {};
 
 var index = {
-  version: '0.0.2',
+  version: '0.0.3',
   set: function set(options) {
     OPTIONS = Object.assign(OPTIONS, options);
   },

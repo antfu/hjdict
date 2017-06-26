@@ -1,4 +1,6 @@
-.map
+*.map
+package-lock.json
+yarn.lock
 
 # Logs
 logs
@@ -59,3 +61,4 @@ typings/
 # dotenv environment variables file
 .env
 dist/hjdict.js.map
+*.map

@@ -1,5 +1,3 @@
-HJDict.set_cors_proxy('https://crossorigin.me/')
-
 Vue.component('hjdict-query', {
   props: {
     query: {
@@ -48,7 +46,7 @@ Vue.component('hjdict-query', {
       this.result.found = false
       if (this.query.trim()) {
         this.empty = false
-        HJDict.jp2cn(this.query, data => {
+        HjDict.jp2cn(this.query, data => {
           if (!data.error) {
             this.result = Object.assign({}, this.result, data)
           } else

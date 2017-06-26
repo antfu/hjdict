@@ -2,13 +2,13 @@ import { request } from './utils'
 import { jp2cn, cn2jp } from './parser/index'
 
 let OPTIONS = {
-  cors_proxy: ''
+  cors_proxy: 'http://crossorigin.me/'
 }
 
 let VOID_CALLBACK = function () {}
 
 export default {
-  version: '0.0.2',
+  version: '0.0.3',
   set(options) {
     OPTIONS = Object.assign(OPTIONS, options)
   },

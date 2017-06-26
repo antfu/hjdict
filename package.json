@@ -1,7 +1,7 @@
 {
   "name": "hjdict",
-  "version": "0.0.2",
-  "description": "An unofficial HJDict API in Javascript",
+  "version": "0.0.3",
+  "description": "An unofficial HjDict API in Javascript",
   "main": "dist/hjdict.js",
   "scripts": {
     "build-prod": "cross-env NODE_ENV=production rollup -c",
@@ -34,6 +34,7 @@
     "mocha": "^3.4.2",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-license": "^0.4.0",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-watch": "^4.0.0"
   }

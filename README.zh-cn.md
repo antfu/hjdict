@@ -1,4 +1,4 @@
-# HJDict
+# HjDict
 [沪江小D](http://dict.hjenglish.com/)非官方API
 
 **[在线Demo](https://antfu.github.io/hjdict/demo/)**
