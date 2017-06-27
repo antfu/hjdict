@@ -16,7 +16,7 @@ if (PROD)
 
 plugins.push(
   license({
-    banner: `HjDict v0.0.3\n(C) Anthony Fu 2017\nReleased under the MIT License.\nhttps://github.com/antfu/hjdict`,
+    banner: `HjDict v0.0.4\n(C) Anthony Fu 2017\nReleased under the MIT License.\nhttps://github.com/antfu/hjdict`,
   }),
 )
 

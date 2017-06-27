@@ -1,5 +1,5 @@
 /**
- * HjDict v0.0.3
+ * HjDict v0.0.4
  * (C) Anthony Fu 2017
  * Released under the MIT License.
  * https://github.com/antfu/hjdict
@@ -222,13 +222,13 @@ var _jp2cn = {
 };
 
 var OPTIONS = {
-  cors_proxy: 'http://crossorigin.me/'
+  cors_proxy: 'https://crossorigin.me/'
 };
 
 var VOID_CALLBACK = function VOID_CALLBACK() {};
 
 var index = {
-  version: '0.0.3',
+  version: '0.0.4',
   set: function set(options) {
     OPTIONS = Object.assign(OPTIONS, options);
   },

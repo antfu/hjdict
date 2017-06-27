@@ -1,4 +1,4 @@
-*.map
+hjdict.js.map
 package-lock.json
 yarn.lock
 
@@ -62,3 +62,4 @@ typings/
 .env
 dist/hjdict.js.map
 *.map
+dist/hjdict.js.map

@@ -1,6 +1,6 @@
 {
   "name": "hjdict",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An unofficial HjDict API in Javascript",
   "main": "dist/hjdict.js",
   "scripts": {
