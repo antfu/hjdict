@@ -6,12 +6,10 @@
  */
 
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('node-fetch')) :
-	typeof define === 'function' && define.amd ? define(['node-fetch'], factory) :
-	(global.HjDict = factory(global.fetch));
-}(this, (function (fetch) { 'use strict';
-
-fetch = fetch && 'default' in fetch ? fetch['default'] : fetch;
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.HjDict = factory());
+}(this, (function () { 'use strict';
 
 var to_unicode = function to_unicode(text) {
   return text.replace(/\\u[\dA-F]{4}/gi, function (match) {
@@ -19,8 +17,8 @@ var to_unicode = function to_unicode(text) {
   });
 };
 
-var request = function request(url, callback) {
-  (fetch || window.fetch)(url).then(function (r) {
+var request = function request(fetch, url, callback) {
+  fetch(url).then(function (r) {
     return r.text();
   }).then(function (raw) {
     var text = to_unicode(raw).replace(/\\t/g, '') // Remove redundant slash
@@ -222,18 +220,26 @@ var _jp2cn = {
 };
 
 var OPTIONS = {
-  cors_proxy: 'https://crossorigin.me/'
+  cors_proxy: 'https://crossorigin.me/',
+  fetch: null
 };
+
+try {
+  OPTIONS.fetch = window.fetch;
+} catch (e) {}
 
 var VOID_CALLBACK = function VOID_CALLBACK() {};
 
 var index = {
-  version: '0.0.4',
+  version: '0.0.5',
   set: function set(options) {
     OPTIONS = Object.assign(OPTIONS, options);
   },
   set_cors_proxy: function set_cors_proxy(proxy) {
     this.set({ cors_proxy: proxy });
+  },
+  set_fetch: function set_fetch(fetch) {
+    this.set({ fetch: fetch });
   },
   jp2cn: function jp2cn(query, callback) {
     this.query({
@@ -254,13 +260,15 @@ var index = {
   query: function query(option) {
     option = Object.assign({}, OPTIONS, option);
 
+    if (!option.fetch) throw Error('Missing "fetch" function. ' + 'If you are using Node.js, you should use "set_fetch" before query.\n' + 'For more details, please refer to: https://github.com/antfu/hjdict#node');
+
     var url = option.url(option.query);
     url = encodeURI(url);
     if (option.cors_proxy) {
       if (typeof option.cors_proxy === 'function') url = option.cors_proxy(url);else url = option.cors_proxy + url;
     }
 
-    var html = request(url, function (data, e) {
+    var html = request(option.fetch, url, function (data, e) {
       var returns = {
         query: option.query
       };

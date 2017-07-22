@@ -1,6 +1,6 @@
 {
   "name": "hjdict",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An unofficial HjDict API in Javascript",
   "main": "dist/hjdict.js",
   "scripts": {
@@ -21,17 +21,17 @@
     "url": "https://github.com/antfu/hjdict/issues"
   },
   "homepage": "https://github.com/antfu/hjdict#readme",
-  "dependencies": {
-    "node-fetch": "^1.7.1"
-  },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-rollup": "^3.0.0",
     "chai": "^4.0.2",
+    "eslint": "^4.3.0",
+    "eslint-config-equimper": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-less": "^3.3.2",
     "gulp-pug": "^3.3.0",
     "mocha": "^3.4.2",
+    "node-fetch": "^1.7.1",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-license": "^0.4.0",

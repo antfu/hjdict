@@ -71,11 +71,14 @@ You should try [the solution here](#cross-origin-request).
 
 ### Node
 ```sh
-npm install hjdict
+npm install hjdict node-fetch
 ```
 ```js
-var HjDict = require('hjdict')
+const fetch = require('node-fetch')
+const HjDict = require('hjdict')
+HjDict.set_fetch(fetch)
 ```
+For Node.js, you should install `note-fetch` and pass it though `HjDict.set_fetch`.
 
 ## Cross Origin Request
 Since version `0.0.3`, the default CORS proxy is set to http://crossorigin.me/.

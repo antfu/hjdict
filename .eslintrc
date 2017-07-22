@@ -1,0 +1,13 @@
+{
+  "extends": "equimper",
+  "plugins": [
+    "html"
+  ],
+  "rules": {
+    "semi": [2, "never"],
+    "curly": [2, "multi-or-nest"],
+    "no-unused-vars": "warn",
+    "no-param-reassign": "warn",
+    "camelcase": "off"
+  }
+}
